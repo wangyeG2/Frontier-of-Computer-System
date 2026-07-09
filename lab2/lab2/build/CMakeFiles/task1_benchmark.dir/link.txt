@@ -1,1 +1,3 @@
-/usr/bin/c++  -O2 -pthread -O3 -DNDEBUG CMakeFiles/task1_benchmark.dir/src/task1_benchmark.cpp.o -o task1_benchmark  /usr/local/lib/libleveldb.a -lpthread 
+version https://git-lfs.github.com/spec/v1
+oid sha256:0cad12d8f0a3493fb3fd4badb2844967f02e9a9c6b3763e46000c9b85e2be30f
+size 156
