@@ -1,0 +1,35 @@
+=== Test 1: write_buffer_size=4MB, Rand Write ===
+Writing 2000000 keys...
+========================================
+Test Type: Rand Write
+Write Buffer Size: 4MB
+Block Size: 4KB
+Bloom Filter: On
+Duration: 98.2709s
+QPS: 20351.9
+Avg Latency: 0.0491355 ms
+========================================
+
+=== Test 2: write_buffer_size=16MB, Rand Write ===
+Writing 2000000 keys...
+========================================
+Test Type: Rand Write
+Write Buffer Size: 16MB
+Block Size: 4KB
+Bloom Filter: On
+Duration: 59.3847s
+QPS: 33678.7
+Avg Latency: 0.0296924 ms
+========================================
+
+=== Test 3: write_buffer_size=64MB, Rand Write ===
+Writing 2000000 keys...
+========================================
+Test Type: Rand Write
+Write Buffer Size: 64MB
+Block Size: 4KB
+Bloom Filter: On
+Duration: 21.6141s
+QPS: 92532.1
+Avg Latency: 0.0108071 ms
+========================================

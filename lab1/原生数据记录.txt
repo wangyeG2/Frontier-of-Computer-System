@@ -1,0 +1,666 @@
+sparkwang@jsyzwangyeNKU:/mnt/d$ cd ~
+sparkwang@jsyzwangyeNKU:~$ mkdir fio_test && cd fio_test
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=seqread --rw=read --bs=4k --numjobs=1 --iodepth=1 --ioengine=pvsync --filename=testfile --size=5G --runtime=30
+seqread: (g=0): rw=read, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=pvsync, iodepth=1
+fio-3.28
+Starting 1 process
+seqread: Laying out IO file (1 file / 5120MiB)
+Jobs: 1 (f=1): [R(1)][-.-%][r=2100MiB/s][r=538k IOPS][eta 00m:00s]
+seqread: (groupid=0, jobs=1): err= 0: pid=1226: Tue Mar 31 16:44:46 2026
+  read: IOPS=536k, BW=2095MiB/s (2197MB/s)(5120MiB/2444msec)
+    clat (nsec): min=289, max=31348k, avg=1751.86, stdev=30657.62
+     lat (nsec): min=302, max=31348k, avg=1766.87, stdev=30657.77
+    clat percentiles (nsec):
+     |  1.00th=[   338],  5.00th=[   350], 10.00th=[   358], 20.00th=[   378],
+     | 30.00th=[   398], 40.00th=[   414], 50.00th=[   434], 60.00th=[   458],
+     | 70.00th=[   490], 80.00th=[   524], 90.00th=[   580], 95.00th=[   636],
+     | 99.00th=[ 40704], 99.50th=[ 99840], 99.90th=[140288], 99.95th=[189440],
+     | 99.99th=[252928]
+   bw (  MiB/s): min= 2064, max= 2273, per=100.00%, avg=2167.44, stdev=103.23, samples=4
+   iops        : min=528416, max=582008, avg=554864.25, stdev=26427.71, samples=4
+  lat (nsec)   : 500=72.73%, 750=24.78%, 1000=0.50%
+  lat (usec)   : 2=0.25%, 4=0.02%, 10=0.07%, 20=0.06%, 50=0.65%
+  lat (usec)   : 100=0.47%, 250=0.45%, 500=0.01%, 750=0.01%, 1000=0.01%
+  lat (msec)   : 2=0.01%, 4=0.01%, 10=0.01%, 50=0.01%
+  cpu          : usr=10.97%, sys=63.73%, ctx=10856, majf=0, minf=15
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=1310720,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+   READ: bw=2095MiB/s (2197MB/s), 2095MiB/s-2095MiB/s (2197MB/s-2197MB/s), io=5120MiB (5369MB), run=2444-2444msec
+
+Disk stats (read/write):
+  sdd: ios=19345/0, merge=0/0, ticks=2982/0, in_queue=2982, util=92.58%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=seqwrite --rw=write --bs=4k --numjobs=1 --iodepth=1 --ioengine=pvsync --filename=testfile --size=5G --runtime=30
+seqwrite: (g=0): rw=write, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=pvsync, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [W(1)][-.-%][w=2447MiB/s][w=626k IOPS][eta 00m:00s]
+seqwrite: (groupid=0, jobs=1): err= 0: pid=1272: Tue Mar 31 16:49:01 2026
+  write: IOPS=543k, BW=2122MiB/s (2225MB/s)(5120MiB/2413msec); 0 zone resets
+    clat (nsec): min=840, max=11320k, avg=1529.32, stdev=14880.29
+     lat (nsec): min=863, max=11320k, avg=1554.24, stdev=14884.74
+    clat percentiles (nsec):
+     |  1.00th=[  1032],  5.00th=[  1064], 10.00th=[  1080], 20.00th=[  1112],
+     | 30.00th=[  1128], 40.00th=[  1160], 50.00th=[  1192], 60.00th=[  1256],
+     | 70.00th=[  1368], 80.00th=[  1544], 90.00th=[  1784], 95.00th=[  2096],
+     | 99.00th=[  7456], 99.50th=[  9024], 99.90th=[ 22144], 99.95th=[ 34560],
+     | 99.99th=[140288]
+   bw (  MiB/s): min= 1090, max= 2483, per=98.59%, avg=2091.93, stdev=669.77, samples=4
+   iops        : min=279076, max=635782, avg=535535.00, stdev=171461.32, samples=4
+  lat (nsec)   : 1000=0.14%
+  lat (usec)   : 2=93.93%, 4=3.88%, 10=1.66%, 20=0.27%, 50=0.08%
+  lat (usec)   : 100=0.02%, 250=0.01%, 500=0.01%, 1000=0.01%
+  lat (msec)   : 2=0.01%, 4=0.01%, 10=0.01%, 20=0.01%
+  cpu          : usr=14.43%, sys=85.24%, ctx=31, majf=0, minf=16
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,1310720,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+  WRITE: bw=2122MiB/s (2225MB/s), 2122MiB/s-2122MiB/s (2225MB/s-2225MB/s), io=5120MiB (5369MB), run=2413-2413msec
+
+Disk stats (read/write):
+  sdd: ios=6/2811, merge=30/2, ticks=6/31681, in_queue=31687, util=38.66%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=randread --rw=randread --bs=4k --numjobs=1 --iodepth=1 --ioengine=pvsync --filename=testfile --size=5G --runtime=30
+randread: (g=0): rw=randread, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=pvsync, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [r(1)][100.0%][r=32.2MiB/s][r=8255 IOPS][eta 00m:00s]
+randread: (groupid=0, jobs=1): err= 0: pid=1302: Tue Mar 31 16:50:33 2026
+  read: IOPS=7919, BW=30.9MiB/s (32.4MB/s)(928MiB/30001msec)
+    clat (usec): min=79, max=11351, avg=124.27, stdev=81.94
+     lat (usec): min=79, max=11352, avg=124.40, stdev=81.95
+    clat percentiles (usec):
+     |  1.00th=[   85],  5.00th=[  100], 10.00th=[  102], 20.00th=[  105],
+     | 30.00th=[  108], 40.00th=[  112], 50.00th=[  116], 60.00th=[  120],
+     | 70.00th=[  126], 80.00th=[  137], 90.00th=[  155], 95.00th=[  176],
+     | 99.00th=[  255], 99.50th=[  293], 99.90th=[  453], 99.95th=[  668],
+     | 99.99th=[ 2540]
+   bw (  KiB/s): min=11624, max=33912, per=100.00%, avg=31686.32, stdev=2882.69, samples=59
+   iops        : min= 2906, max= 8478, avg=7921.37, stdev=720.63, samples=59
+  lat (usec)   : 100=4.81%, 250=94.12%, 500=0.99%, 750=0.04%, 1000=0.02%
+  lat (msec)   : 2=0.01%, 4=0.01%, 10=0.01%, 20=0.01%
+  cpu          : usr=0.88%, sys=9.29%, ctx=237614, majf=0, minf=14
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=237588,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+   READ: bw=30.9MiB/s (32.4MB/s), 30.9MiB/s-30.9MiB/s (32.4MB/s-32.4MB/s), io=928MiB (973MB), run=30001-30001msec
+
+Disk stats (read/write):
+  sdd: ios=236329/43, merge=28/20, ticks=25637/17, in_queue=25657, util=78.92%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=randwrite --rw=randwrite --bs=4k --numjobs=1 --iodepth=1 --ioengine=pvsync --filename=testfile --size=5G --runtime=30
+randwrite: (g=0): rw=randwrite, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=pvsync, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [w(1)][-.-%][w=1338MiB/s][w=342k IOPS][eta 00m:00s]
+randwrite: (groupid=0, jobs=1): err= 0: pid=1334: Tue Mar 31 16:51:37 2026
+  write: IOPS=369k, BW=1441MiB/s (1511MB/s)(5120MiB/3553msec); 0 zone resets
+    clat (nsec): min=866, max=2124.5k, avg=2438.36, stdev=5188.30
+     lat (nsec): min=888, max=2124.6k, avg=2475.79, stdev=5197.79
+    clat percentiles (nsec):
+     |  1.00th=[   972],  5.00th=[  1048], 10.00th=[  1112], 20.00th=[  1224],
+     | 30.00th=[  1320], 40.00th=[  1400], 50.00th=[  1480], 60.00th=[  1576],
+     | 70.00th=[  1704], 80.00th=[  1976], 90.00th=[  2736], 95.00th=[ 12096],
+     | 99.00th=[ 15808], 99.50th=[ 21376], 99.90th=[ 46336], 99.95th=[ 57088],
+     | 99.99th=[125440]
+   bw (  MiB/s): min= 1178, max= 2245, per=100.00%, avg=1444.67, stdev=359.61, samples=7
+   iops        : min=301792, max=574836, avg=369836.00, stdev=92058.90, samples=7
+  lat (nsec)   : 1000=2.16%
+  lat (usec)   : 2=78.52%, 4=12.83%, 10=1.05%, 20=4.90%, 50=0.46%
+  lat (usec)   : 100=0.06%, 250=0.01%, 500=0.01%, 750=0.01%, 1000=0.01%
+  lat (msec)   : 2=0.01%, 4=0.01%
+  cpu          : usr=15.06%, sys=87.22%, ctx=7, majf=0, minf=16
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,1310720,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+  WRITE: bw=1441MiB/s (1511MB/s), 1441MiB/s-1441MiB/s (1511MB/s-1511MB/s), io=5120MiB (5369MB), run=3553-3553msec
+
+Disk stats (read/write):
+  sdd: ios=0/483431, merge=0/0, ticks=0/5800432, in_queue=5800432, util=70.16%
+sparkwang@jsyzwangyeNKU:~$ cd ~
+sparkwang@jsyzwangyeNKU:~$ cd fio_test
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=seqread_pvsync --rw=read --bs=4k --numjobs=1 --iodepth=1 --ioengine=pvsync --filename=testfile --size=5G --runtime=30
+seqread_pvsync: (g=0): rw=read, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=pvsync, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [R(1)][100.0%][r=533MiB/s][r=137k IOPS][eta 00m:00s]
+seqread_pvsync: (groupid=0, jobs=1): err= 0: pid=489: Wed Apr  1 11:40:34 2026
+  read: IOPS=139k, BW=544MiB/s (571MB/s)(5120MiB/9409msec)
+    clat (nsec): min=363, max=6090.2k, avg=7042.18, stdev=61421.90
+     lat (nsec): min=378, max=6090.2k, avg=7059.81, stdev=61422.08
+    clat percentiles (nsec):
+     |  1.00th=[    390],  5.00th=[    402], 10.00th=[    410],
+     | 20.00th=[    422], 30.00th=[    434], 40.00th=[    450],
+     | 50.00th=[    470], 60.00th=[    494], 70.00th=[    524],
+     | 80.00th=[    580], 90.00th=[    660], 95.00th=[    724],
+     | 99.00th=[ 284672], 99.50th=[ 505856], 99.90th=[ 864256],
+     | 99.95th=[ 970752], 99.99th=[1236992]
+   bw (  KiB/s): min=501290, max=593245, per=99.99%, avg=557144.89, stdev=27070.46, samples=18
+   iops        : min=125322, max=148311, avg=139285.94, stdev=6767.58, samples=18
+  lat (nsec)   : 500=62.52%, 750=33.00%, 1000=1.60%
+  lat (usec)   : 2=0.98%, 4=0.10%, 10=0.18%, 20=0.03%, 50=0.01%
+  lat (usec)   : 100=0.08%, 250=0.40%, 500=0.59%, 750=0.32%, 1000=0.14%
+  lat (msec)   : 2=0.04%, 4=0.01%, 10=0.01%
+  cpu          : usr=2.82%, sys=31.08%, ctx=16858, majf=1, minf=15
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=1310720,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+   READ: bw=544MiB/s (571MB/s), 544MiB/s-544MiB/s (571MB/s-571MB/s), io=5120MiB (5369MB), run=9409-9409msec
+
+Disk stats (read/write):
+  sdd: ios=20279/2, merge=0/1, ticks=14748/5, in_queue=14756, util=96.06%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=seqread_libaio --rw=read --bs=4k --numjobs=1 --iodepth=1 --ioengine=libaio --filename=testfile --size=5G --runtime=30
+seqread_libaio: (g=0): rw=read, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [R(1)][100.0%][r=541MiB/s][r=138k IOPS][eta 00m:00s]
+seqread_libaio: (groupid=0, jobs=1): err= 0: pid=517: Wed Apr  1 11:41:18 2026
+  read: IOPS=141k, BW=550MiB/s (577MB/s)(5120MiB/9312msec)
+    slat (nsec): min=489, max=42256k, avg=6590.69, stdev=79303.03
+    clat (nsec): min=148, max=162371, avg=195.74, stdev=506.82
+     lat (nsec): min=686, max=42262k, avg=6813.25, stdev=79382.50
+    clat percentiles (nsec):
+     |  1.00th=[  163],  5.00th=[  167], 10.00th=[  169], 20.00th=[  171],
+     | 30.00th=[  173], 40.00th=[  175], 50.00th=[  177], 60.00th=[  179],
+     | 70.00th=[  181], 80.00th=[  183], 90.00th=[  193], 95.00th=[  213],
+     | 99.00th=[  612], 99.50th=[ 1144], 99.90th=[ 1704], 99.95th=[ 2192],
+     | 99.99th=[15680]
+   bw (  KiB/s): min=331442, max=647680, per=100.00%, avg=564730.00, stdev=72267.59, samples=18
+   iops        : min=82860, max=161920, avg=141182.22, stdev=18066.92, samples=18
+  lat (nsec)   : 250=97.72%, 500=1.15%, 750=0.22%, 1000=0.15%
+  lat (usec)   : 2=0.70%, 4=0.03%, 10=0.02%, 20=0.01%, 50=0.01%
+  lat (usec)   : 100=0.01%, 250=0.01%
+  cpu          : usr=4.92%, sys=26.93%, ctx=17489, majf=0, minf=13
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=1310720,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+   READ: bw=550MiB/s (577MB/s), 550MiB/s-550MiB/s (577MB/s-577MB/s), io=5120MiB (5369MB), run=9312-9312msec
+
+Disk stats (read/write):
+  sdd: ios=20064/3, merge=0/1, ticks=14156/4, in_queue=14162, util=90.92%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=seqread_uring --rw=read --bs=4k --numjobs=1 --iodepth=1 --ioengine=io_uring --filename=testfile --size=5G --runtime=30
+seqread_uring: (g=0): rw=read, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=io_uring, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [R(1)][100.0%][r=534MiB/s][r=137k IOPS][eta 00m:00s]
+seqread_uring: (groupid=0, jobs=1): err= 0: pid=546: Wed Apr  1 11:41:59 2026
+  read: IOPS=144k, BW=562MiB/s (589MB/s)(5120MiB/9108msec)
+    slat (nsec): min=426, max=26394k, avg=1599.33, stdev=39209.12
+    clat (nsec): min=25, max=7120.1k, avg=4998.70, stdev=50963.07
+     lat (nsec): min=506, max=26396k, avg=6645.51, stdev=68414.26
+    clat percentiles (nsec):
+     |  1.00th=[     37],  5.00th=[     41], 10.00th=[     41],
+     | 20.00th=[     42], 30.00th=[     43], 40.00th=[     44],
+     | 50.00th=[     44], 60.00th=[     45], 70.00th=[     45],
+     | 80.00th=[     47], 90.00th=[     57], 95.00th=[     65],
+     | 99.00th=[ 187392], 99.50th=[ 407552], 99.90th=[ 749568],
+     | 99.95th=[ 856064], 99.99th=[1089536]
+   bw (  KiB/s): min=307880, max=659968, per=100.00%, avg=576252.11, stdev=78478.96, samples=18
+   iops        : min=76970, max=164992, avg=144062.83, stdev=19619.69, samples=18
+  lat (nsec)   : 50=86.77%, 100=10.34%, 250=1.23%, 500=0.24%, 750=0.01%
+  lat (nsec)   : 1000=0.03%
+  lat (usec)   : 2=0.02%, 4=0.01%, 10=0.01%, 20=0.01%, 50=0.02%
+  lat (usec)   : 100=0.10%, 250=0.39%, 500=0.48%, 750=0.26%, 1000=0.08%
+  lat (msec)   : 2=0.02%, 4=0.01%, 10=0.01%
+  cpu          : usr=4.91%, sys=24.29%, ctx=17692, majf=0, minf=13
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=1310720,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+   READ: bw=562MiB/s (589MB/s), 562MiB/s-562MiB/s (589MB/s-589MB/s), io=5120MiB (5369MB), run=9108-9108msec
+
+Disk stats (read/write):
+  sdd: ios=20379/7, merge=0/2, ticks=15013/9, in_queue=15026, util=95.78%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=seqread_mmap --rw=read --bs=4k --numjobs=1 --iodepth=1 --ioengine=mmap --filename=testfile --size=5G --runtime=30
+seqread_mmap: (g=0): rw=read, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=mmap, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [R(1)][100.0%][r=529MiB/s][r=136k IOPS][eta 00m:00s]
+seqread_mmap: (groupid=0, jobs=1): err= 0: pid=573: Wed Apr  1 11:42:39 2026
+  read: IOPS=138k, BW=538MiB/s (564MB/s)(5120MiB/9521msec)
+    clat (nsec): min=108, max=38925k, avg=6844.15, stdev=81435.61
+     lat (nsec): min=123, max=38925k, avg=6861.00, stdev=81435.49
+    clat percentiles (nsec):
+     |  1.00th=[    131],  5.00th=[    139], 10.00th=[    147],
+     | 20.00th=[    157], 30.00th=[    161], 40.00th=[    167],
+     | 50.00th=[    177], 60.00th=[    191], 70.00th=[    207],
+     | 80.00th=[    237], 90.00th=[    330], 95.00th=[   1656],
+     | 99.00th=[ 280576], 99.50th=[ 509952], 99.90th=[ 856064],
+     | 99.95th=[ 970752], 99.99th=[1236992]
+   bw (  KiB/s): min=306186, max=648906, per=100.00%, avg=551194.50, stdev=80561.55, samples=18
+   iops        : min=76546, max=162226, avg=137798.28, stdev=20140.39, samples=18
+  lat (nsec)   : 250=82.30%, 500=10.88%, 750=0.39%, 1000=0.06%
+  lat (usec)   : 2=4.25%, 4=0.39%, 10=0.13%, 20=0.02%, 50=0.09%
+  lat (usec)   : 100=0.07%, 250=0.34%, 500=0.56%, 750=0.34%, 1000=0.14%
+  lat (msec)   : 2=0.04%, 4=0.01%, 10=0.01%, 20=0.01%, 50=0.01%
+  cpu          : usr=6.40%, sys=21.43%, ctx=17656, majf=20486, minf=61462
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=1310720,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+   READ: bw=538MiB/s (564MB/s), 538MiB/s-538MiB/s (564MB/s-564MB/s), io=5120MiB (5369MB), run=9521-9521msec
+
+Disk stats (read/write):
+  sdd: ios=20408/1, merge=0/0, ticks=15171/0, in_queue=15172, util=92.15%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=seqwrite_pvsync --rw=write --bs=4k --numjobs=1 --iodepth=1 --ioengine=pvsync --filename=testfile --size=5G --runtime=30
+seqwrite_pvsync: (g=0): rw=write, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=pvsync, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [W(1)][-.-%][w=2470MiB/s][w=632k IOPS][eta 00m:00s]
+seqwrite_pvsync: (groupid=0, jobs=1): err= 0: pid=598: Wed Apr  1 11:43:07 2026
+  write: IOPS=560k, BW=2186MiB/s (2292MB/s)(5120MiB/2342msec); 0 zone resets
+    clat (nsec): min=892, max=13944k, avg=1463.54, stdev=14312.45
+     lat (nsec): min=918, max=13945k, avg=1489.37, stdev=14313.58
+    clat percentiles (nsec):
+     |  1.00th=[  972],  5.00th=[ 1004], 10.00th=[ 1032], 20.00th=[ 1064],
+     | 30.00th=[ 1096], 40.00th=[ 1144], 50.00th=[ 1192], 60.00th=[ 1240],
+     | 70.00th=[ 1336], 80.00th=[ 1544], 90.00th=[ 1880], 95.00th=[ 2192],
+     | 99.00th=[ 5856], 99.50th=[12096], 99.90th=[15808], 99.95th=[22400],
+     | 99.99th=[61184]
+   bw (  MiB/s): min= 1544, max= 2551, per=100.00%, avg=2259.98, stdev=480.44, samples=4
+   iops        : min=395397, max=653153, avg=578555.75, stdev=122992.19, samples=4
+  lat (nsec)   : 1000=3.80%
+  lat (usec)   : 2=88.63%, 4=6.38%, 10=0.45%, 20=0.67%, 50=0.05%
+  lat (usec)   : 100=0.01%, 250=0.01%, 500=0.01%, 750=0.01%
+  lat (msec)   : 10=0.01%, 20=0.01%
+  cpu          : usr=16.74%, sys=75.40%, ctx=27, majf=0, minf=14
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,1310720,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+  WRITE: bw=2186MiB/s (2292MB/s), 2186MiB/s-2186MiB/s (2292MB/s-2292MB/s), io=5120MiB (5369MB), run=2342-2342msec
+
+Disk stats (read/write):
+  sdd: ios=0/3244, merge=0/0, ticks=0/28034, in_queue=28035, util=52.80%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=seqwrite_libaio --rw=write --bs=4k --numjobs=1 --iodepth=1 --ioengine=libaio --filename=testfile --size=5G --runtime=30
+seqwrite_libaio: (g=0): rw=write, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1)
+seqwrite_libaio: (groupid=0, jobs=1): err= 0: pid=623: Wed Apr  1 11:43:28 2026
+  write: IOPS=493k, BW=1927MiB/s (2021MB/s)(5120MiB/2657msec); 0 zone resets
+    slat (nsec): min=949, max=12371k, avg=1428.78, stdev=15210.58
+    clat (nsec): min=151, max=262985, avg=183.75, stdev=558.50
+     lat (nsec): min=1177, max=12375k, avg=1658.35, stdev=15231.19
+    clat percentiles (nsec):
+     |  1.00th=[  163],  5.00th=[  165], 10.00th=[  167], 20.00th=[  169],
+     | 30.00th=[  171], 40.00th=[  173], 50.00th=[  175], 60.00th=[  177],
+     | 70.00th=[  179], 80.00th=[  181], 90.00th=[  187], 95.00th=[  197],
+     | 99.00th=[  286], 99.50th=[  302], 99.90th=[  540], 99.95th=[ 1768],
+     | 99.99th=[ 8896]
+   bw (  MiB/s): min=  907, max= 2357, per=100.00%, avg=1953.63, stdev=591.59, samples=5
+   iops        : min=232234, max=603583, avg=500128.00, stdev=151447.56, samples=5
+  lat (nsec)   : 250=98.58%, 500=1.30%, 750=0.04%, 1000=0.01%
+  lat (usec)   : 2=0.02%, 4=0.01%, 10=0.03%, 20=0.01%, 50=0.01%
+  lat (usec)   : 100=0.01%, 250=0.01%, 500=0.01%
+  cpu          : usr=20.63%, sys=79.18%, ctx=37, majf=0, minf=13
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,1310720,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+  WRITE: bw=1927MiB/s (2021MB/s), 1927MiB/s-1927MiB/s (2021MB/s-2021MB/s), io=5120MiB (5369MB), run=2657-2657msec
+
+Disk stats (read/write):
+  sdd: ios=0/2890, merge=0/1, ticks=0/126840, in_queue=126841, util=46.27%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=seqwrite_uring --rw=write --bs=4k --numjobs=1 --iodepth=1 --ioengine=io_uring --filename=testfile --size=5G --runtime=30
+seqwrite_uring: (g=0): rw=write, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=io_uring, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [W(1)][100.0%][w=113MiB/s][w=28.9k IOPS][eta 00m:00s]
+seqwrite_uring: (groupid=0, jobs=1): err= 0: pid=652: Wed Apr  1 11:44:19 2026
+  write: IOPS=27.3k, BW=107MiB/s (112MB/s)(3203MiB/30001msec); 0 zone resets
+    slat (nsec): min=359, max=1734.4k, avg=8824.28, stdev=3993.15
+    clat (nsec): min=79, max=14034k, avg=26992.42, stdev=62601.40
+     lat (usec): min=4, max=14042, avg=35.91, stdev=62.71
+    clat percentiles (usec):
+     |  1.00th=[   17],  5.00th=[   22], 10.00th=[   23], 20.00th=[   23],
+     | 30.00th=[   24], 40.00th=[   24], 50.00th=[   24], 60.00th=[   25],
+     | 70.00th=[   26], 80.00th=[   27], 90.00th=[   31], 95.00th=[   40],
+     | 99.00th=[   86], 99.50th=[  126], 99.90th=[  176], 99.95th=[  221],
+     | 99.99th=[  668]
+   bw (  KiB/s): min=46136, max=117907, per=100.00%, avg=109378.00, stdev=9623.54, samples=59
+   iops        : min=11534, max=29476, avg=27344.31, stdev=2405.86, samples=59
+  lat (nsec)   : 100=0.41%, 250=0.32%, 500=0.05%, 750=0.01%, 1000=0.01%
+  lat (usec)   : 2=0.01%, 4=0.03%, 10=0.06%, 20=1.25%, 50=95.62%
+  lat (usec)   : 100=1.42%, 250=0.78%, 500=0.02%, 750=0.01%, 1000=0.01%
+  lat (msec)   : 2=0.01%, 4=0.01%, 10=0.01%, 20=0.01%
+  cpu          : usr=2.70%, sys=30.97%, ctx=813416, majf=0, minf=17
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,819924,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+  WRITE: bw=107MiB/s (112MB/s), 107MiB/s-107MiB/s (112MB/s-112MB/s), io=3203MiB (3358MB), run=30001-30001msec
+
+Disk stats (read/write):
+  sdd: ios=0/1691, merge=0/13, ticks=0/120824, in_queue=120829, util=1.95%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=seqwrite_mmap --rw=write --bs=4k --numjobs=1 --iodepth=1 --ioengine=mmap --filename=testfile --size=5G --runtime=30
+seqwrite_mmap: (g=0): rw=write, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=mmap, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [W(1)][100.0%][w=768MiB/s][w=197k IOPS][eta 00m:00s]
+seqwrite_mmap: (groupid=0, jobs=1): err= 0: pid=682: Wed Apr  1 11:44:54 2026
+  write: IOPS=203k, BW=792MiB/s (831MB/s)(5120MiB/6463msec); 0 zone resets
+    clat (nsec): min=950, max=87852k, avg=4367.85, stdev=141448.45
+     lat (nsec): min=973, max=87852k, avg=4396.93, stdev=141448.69
+    clat percentiles (nsec):
+     |  1.00th=[  1020],  5.00th=[  1048], 10.00th=[  1064], 20.00th=[  1080],
+     | 30.00th=[  1096], 40.00th=[  1112], 50.00th=[  1144], 60.00th=[  1160],
+     | 70.00th=[  1192], 80.00th=[  1336], 90.00th=[  5280], 95.00th=[  5664],
+     | 99.00th=[ 93696], 99.50th=[128512], 99.90th=[222208], 99.95th=[280576],
+     | 99.99th=[577536]
+   bw (  KiB/s): min=430682, max=1306112, per=98.05%, avg=795409.25, stdev=227666.55, samples=12
+   iops        : min=107670, max=326528, avg=198852.08, stdev=56916.78, samples=12
+  lat (nsec)   : 1000=0.03%
+  lat (usec)   : 2=84.20%, 4=1.05%, 10=12.75%, 20=0.23%, 50=0.32%
+  lat (usec)   : 100=0.54%, 250=0.80%, 500=0.06%, 750=0.01%, 1000=0.01%
+  lat (msec)   : 2=0.01%, 4=0.01%, 10=0.01%, 20=0.01%, 50=0.01%
+  lat (msec)   : 100=0.01%
+  cpu          : usr=15.27%, sys=54.35%, ctx=7787, majf=20482, minf=1290256
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,1310720,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+  WRITE: bw=792MiB/s (831MB/s), 792MiB/s-792MiB/s (831MB/s-831MB/s), io=5120MiB (5369MB), run=6463-6463msec
+
+Disk stats (read/write):
+  sdd: ios=20332/3284, merge=0/23, ticks=6182/101381, in_queue=107564, util=79.75%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=randread_pvsync --rw=randread --bs=4k --numjobs=1 --iodepth=1 --ioengine=pvsync --filename=testfile --size=5G --runtime=30
+randread_pvsync: (g=0): rw=randread, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=pvsync, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [r(1)][100.0%][r=32.0MiB/s][r=8198 IOPS][eta 00m:00s]
+randread_pvsync: (groupid=0, jobs=1): err= 0: pid=1237: Wed Apr  1 11:45:42 2026
+  read: IOPS=7922, BW=30.9MiB/s (32.4MB/s)(928MiB/30001msec)
+    clat (usec): min=84, max=12394, avg=124.16, stdev=89.28
+     lat (usec): min=85, max=12395, avg=124.27, stdev=89.28
+    clat percentiles (usec):
+     |  1.00th=[   94],  5.00th=[   95], 10.00th=[   96], 20.00th=[  100],
+     | 30.00th=[  103], 40.00th=[  109], 50.00th=[  115], 60.00th=[  121],
+     | 70.00th=[  128], 80.00th=[  139], 90.00th=[  157], 95.00th=[  184],
+     | 99.00th=[  265], 99.50th=[  302], 99.90th=[  519], 99.95th=[  750],
+     | 99.99th=[ 1811]
+   bw (  KiB/s): min=11640, max=36200, per=100.00%, avg=31703.54, stdev=3375.74, samples=59
+   iops        : min= 2910, max= 9050, avg=7925.78, stdev=843.94, samples=59
+  lat (usec)   : 100=21.57%, 250=77.09%, 500=1.23%, 750=0.06%, 1000=0.03%
+  lat (msec)   : 2=0.01%, 4=0.01%, 10=0.01%, 20=0.01%
+  cpu          : usr=0.98%, sys=8.33%, ctx=237691, majf=0, minf=12
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=237677,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+   READ: bw=30.9MiB/s (32.4MB/s), 30.9MiB/s-30.9MiB/s (32.4MB/s-32.4MB/s), io=928MiB (974MB), run=30001-30001msec
+
+Disk stats (read/write):
+  sdd: ios=236525/9811, merge=176/19671, ticks=27409/5907, in_queue=34857, util=80.04%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=randread_libaio --rw=randread --bs=4k --numjobs=1 --iodepth=1 --ioengine=libaio --filename=testfile --size=5G --runtime=30
+randread_libaio: (g=0): rw=randread, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [r(1)][100.0%][r=26.5MiB/s][r=6790 IOPS][eta 00m:00s]
+randread_libaio: (groupid=0, jobs=1): err= 0: pid=3416: Wed Apr  1 11:46:37 2026
+  read: IOPS=7277, BW=28.4MiB/s (29.8MB/s)(853MiB/30001msec)
+    slat (usec): min=108, max=5276, avg=136.03, stdev=46.65
+    clat (nsec): min=281, max=118620, avg=468.03, stdev=621.62
+     lat (usec): min=109, max=5278, avg=136.65, stdev=46.83
+    clat percentiles (nsec):
+     |  1.00th=[  294],  5.00th=[  294], 10.00th=[  298], 20.00th=[  306],
+     | 30.00th=[  310], 40.00th=[  314], 50.00th=[  326], 60.00th=[  374],
+     | 70.00th=[  474], 80.00th=[  564], 90.00th=[  724], 95.00th=[ 1112],
+     | 99.00th=[ 1608], 99.50th=[ 1672], 99.90th=[ 2448], 99.95th=[ 6048],
+     | 99.99th=[20864]
+   bw (  KiB/s): min=25908, max=30613, per=100.00%, avg=29142.47, stdev=1242.89, samples=59
+   iops        : min= 6477, max= 7653, avg=7285.24, stdev=310.66, samples=59
+  lat (nsec)   : 500=72.82%, 750=17.70%, 1000=3.36%
+  lat (usec)   : 2=5.93%, 4=0.10%, 10=0.05%, 20=0.01%, 50=0.01%
+  lat (usec)   : 100=0.01%, 250=0.01%
+  cpu          : usr=0.95%, sys=6.47%, ctx=218329, majf=0, minf=25
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=218320,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+   READ: bw=28.4MiB/s (29.8MB/s), 28.4MiB/s-28.4MiB/s (29.8MB/s-29.8MB/s), io=853MiB (894MB), run=30001-30001msec
+
+Disk stats (read/write):
+  sdd: ios=217244/11, merge=0/7, ticks=26847/3, in_queue=26852, util=83.05%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=randread_uring --rw=randread --bs=4k --numjobs=1 --iodepth=1 --ioengine=io_uring --filename=testfile --size=5G --runtime=30
+randread_uring: (g=0): rw=randread, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=io_uring, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [r(1)][100.0%][r=29.0MiB/s][r=7433 IOPS][eta 00m:00s]
+randread_uring: (groupid=0, jobs=1): err= 0: pid=3445: Wed Apr  1 11:47:23 2026
+  read: IOPS=7145, BW=27.9MiB/s (29.3MB/s)(837MiB/30001msec)
+    slat (usec): min=3, max=1801, avg= 5.67, stdev=11.06
+    clat (nsec): min=116, max=4460.6k, avg=133338.41, stdev=43008.87
+     lat (usec): min=104, max=4474, avg=139.09, stdev=45.20
+    clat percentiles (usec):
+     |  1.00th=[  112],  5.00th=[  113], 10.00th=[  114], 20.00th=[  115],
+     | 30.00th=[  120], 40.00th=[  123], 50.00th=[  126], 60.00th=[  129],
+     | 70.00th=[  133], 80.00th=[  139], 90.00th=[  157], 95.00th=[  190],
+     | 99.00th=[  262], 99.50th=[  302], 99.90th=[  502], 99.95th=[  758],
+     | 99.99th=[ 1074]
+   bw (  KiB/s): min=23634, max=30261, per=100.00%, avg=28608.61, stdev=1272.92, samples=59
+   iops        : min= 5908, max= 7565, avg=7151.78, stdev=318.21, samples=59
+  lat (nsec)   : 250=0.01%, 500=0.01%
+  lat (usec)   : 50=0.01%, 100=0.02%, 250=98.63%, 500=1.24%, 750=0.05%
+  lat (usec)   : 1000=0.03%
+  lat (msec)   : 2=0.01%, 4=0.01%, 10=0.01%
+  cpu          : usr=0.89%, sys=6.28%, ctx=214348, majf=0, minf=15
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=214361,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+   READ: bw=27.9MiB/s (29.3MB/s), 27.9MiB/s-27.9MiB/s (29.3MB/s-29.3MB/s), io=837MiB (878MB), run=30001-30001msec
+
+Disk stats (read/write):
+  sdd: ios=213474/6, merge=0/4, ticks=26660/1, in_queue=26662, util=82.30%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=randread_mmap --rw=randread --bs=4k --numjobs=1 --iodepth=1 --ioengine=mmap --filename=testfile --size=5G --runtime=30
+randread_mmap: (g=0): rw=randread, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=mmap, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [r(1)][100.0%][r=28.0MiB/s][r=7163 IOPS][eta 00m:00s]
+randread_mmap: (groupid=0, jobs=1): err= 0: pid=3472: Wed Apr  1 11:48:13 2026
+  read: IOPS=6919, BW=27.0MiB/s (28.3MB/s)(811MiB/30001msec)
+    clat (usec): min=110, max=11578, avg=143.67, stdev=82.50
+     lat (usec): min=110, max=11579, avg=143.69, stdev=82.51
+    clat percentiles (usec):
+     |  1.00th=[  117],  5.00th=[  118], 10.00th=[  119], 20.00th=[  125],
+     | 30.00th=[  129], 40.00th=[  133], 50.00th=[  135], 60.00th=[  139],
+     | 70.00th=[  143], 80.00th=[  149], 90.00th=[  174], 95.00th=[  206],
+     | 99.00th=[  277], 99.50th=[  314], 99.90th=[  545], 99.95th=[  865],
+     | 99.99th=[ 1696]
+   bw (  KiB/s): min=22823, max=29920, per=100.00%, avg=27700.66, stdev=1550.35, samples=59
+   iops        : min= 5705, max= 7480, avg=6924.85, stdev=387.62, samples=59
+  lat (usec)   : 250=97.96%, 500=1.93%, 750=0.06%, 1000=0.03%
+  lat (msec)   : 2=0.03%, 4=0.01%, 10=0.01%, 20=0.01%
+  cpu          : usr=0.99%, sys=6.31%, ctx=207613, majf=207606, minf=17
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=207606,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+   READ: bw=27.0MiB/s (28.3MB/s), 27.0MiB/s-27.0MiB/s (28.3MB/s-28.3MB/s), io=811MiB (850MB), run=30001-30001msec
+
+Disk stats (read/write):
+  sdd: ios=206017/11, merge=0/7, ticks=26491/4, in_queue=26496, util=81.67%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=randwrite_pvsync --rw=randwrite --bs=4k --numjobs=1 --iodepth=1 --ioengine=pvsync --filename=testfile --size=5G --runtime=30
+randwrite_pvsync: (g=0): rw=randwrite, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=pvsync, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [w(1)][100.0%][w=1185MiB/s][w=303k IOPS][eta 00m:00s]
+randwrite_pvsync: (groupid=0, jobs=1): err= 0: pid=3501: Wed Apr  1 11:48:38 2026
+  write: IOPS=337k, BW=1318MiB/s (1382MB/s)(5120MiB/3884msec); 0 zone resets
+    clat (nsec): min=926, max=3212.6k, avg=2700.34, stdev=8082.65
+     lat (nsec): min=949, max=3212.6k, avg=2742.10, stdev=8086.46
+    clat percentiles (nsec):
+     |  1.00th=[  1048],  5.00th=[  1144], 10.00th=[  1208], 20.00th=[  1320],
+     | 30.00th=[  1416], 40.00th=[  1512], 50.00th=[  1608], 60.00th=[  1720],
+     | 70.00th=[  1864], 80.00th=[  2192], 90.00th=[  3088], 95.00th=[  8096],
+     | 99.00th=[ 20352], 99.50th=[ 29824], 99.90th=[ 57600], 99.95th=[ 76288],
+     | 99.99th=[168960]
+   bw (  MiB/s): min= 1037, max= 2343, per=100.00%, avg=1338.36, stdev=451.33, samples=7
+   iops        : min=265509, max=599886, avg=342619.14, stdev=115541.17, samples=7
+  lat (nsec)   : 1000=0.17%
+  lat (usec)   : 2=75.41%, 4=17.67%, 10=1.85%, 20=3.85%, 50=0.86%
+  lat (usec)   : 100=0.15%, 250=0.03%, 500=0.01%, 750=0.01%, 1000=0.01%
+  lat (msec)   : 2=0.01%, 4=0.01%
+  cpu          : usr=12.36%, sys=81.46%, ctx=7, majf=1, minf=13
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,1310720,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+  WRITE: bw=1318MiB/s (1382MB/s), 1318MiB/s-1318MiB/s (1382MB/s-1382MB/s), io=5120MiB (5369MB), run=3884-3884msec
+
+Disk stats (read/write):
+  sdd: ios=3/493698, merge=30/1, ticks=6/8168145, in_queue=8168151, util=75.19%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=randwrite_libaio --rw=randwrite --bs=4k --numjobs=1 --iodepth=1 --ioengine=libaio --filename=testfile --size=5G --runtime=30
+randwrite_libaio: (g=0): rw=randwrite, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [w(1)][100.0%][w=1201MiB/s][w=308k IOPS][eta 00m:00s]
+randwrite_libaio: (groupid=0, jobs=1): err= 0: pid=3526: Wed Apr  1 11:49:19 2026
+  write: IOPS=267k, BW=1042MiB/s (1093MB/s)(5120MiB/4913msec); 0 zone resets
+    slat (nsec): min=1045, max=28381k, avg=2593.76, stdev=31774.79
+    clat (nsec): min=164, max=526371, avg=264.78, stdev=897.71
+     lat (nsec): min=1270, max=28389k, avg=2920.15, stdev=31831.67
+    clat percentiles (nsec):
+     |  1.00th=[  173],  5.00th=[  177], 10.00th=[  179], 20.00th=[  187],
+     | 30.00th=[  209], 40.00th=[  221], 50.00th=[  229], 60.00th=[  233],
+     | 70.00th=[  239], 80.00th=[  249], 90.00th=[  398], 95.00th=[  494],
+     | 99.00th=[  580], 99.50th=[  836], 99.90th=[ 2256], 99.95th=[ 3184],
+     | 99.99th=[25216]
+   bw (  MiB/s): min=  878, max= 1679, per=100.00%, avg=1194.65, stdev=249.68, samples=8
+   iops        : min=224900, max=429996, avg=305830.62, stdev=63918.30, samples=8
+  lat (nsec)   : 250=80.07%, 500=15.51%, 750=3.77%, 1000=0.24%
+  lat (usec)   : 2=0.23%, 4=0.14%, 10=0.02%, 20=0.01%, 50=0.01%
+  lat (usec)   : 100=0.01%, 250=0.01%, 500=0.01%, 750=0.01%
+  cpu          : usr=16.35%, sys=78.62%, ctx=76, majf=0, minf=12
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,1310720,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+  WRITE: bw=1042MiB/s (1093MB/s), 1042MiB/s-1042MiB/s (1093MB/s-1093MB/s), io=5120MiB (5369MB), run=4913-4913msec
+
+Disk stats (read/write):
+  sdd: ios=0/539887, merge=0/5, ticks=0/9262329, in_queue=9262329, util=64.86%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=randwrite_uring --rw=randwrite --bs=4k --numjobs=1 --iodepth=1 --ioengine=io_uring --filename=testfile --size=5G --runtime=30
+randwrite_uring: (g=0): rw=randwrite, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=io_uring, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [w(1)][100.0%][w=108MiB/s][w=27.7k IOPS][eta 00m:00s]
+randwrite_uring: (groupid=0, jobs=1): err= 0: pid=3555: Wed Apr  1 11:50:09 2026
+  write: IOPS=25.8k, BW=101MiB/s (106MB/s)(3025MiB/30001msec); 0 zone resets
+    slat (nsec): min=374, max=2425.6k, avg=9113.33, stdev=6693.02
+    clat (nsec): min=82, max=13377k, avg=28170.47, stdev=62893.29
+     lat (usec): min=4, max=13389, avg=37.38, stdev=63.34
+    clat percentiles (usec):
+     |  1.00th=[   12],  5.00th=[   23], 10.00th=[   23], 20.00th=[   23],
+     | 30.00th=[   24], 40.00th=[   24], 50.00th=[   25], 60.00th=[   25],
+     | 70.00th=[   26], 80.00th=[   29], 90.00th=[   35], 95.00th=[   44],
+     | 99.00th=[  100], 99.50th=[  131], 99.90th=[  190], 99.95th=[  247],
+     | 99.99th=[  791]
+   bw (  KiB/s): min=49784, max=119887, per=100.00%, avg=105105.43, stdev=13536.80, samples=58
+   iops        : min=12446, max=29971, avg=26276.19, stdev=3384.18, samples=58
+  lat (nsec)   : 100=0.39%, 250=0.29%, 500=0.10%, 750=0.02%, 1000=0.01%
+  lat (usec)   : 2=0.01%, 4=0.02%, 10=0.08%, 20=1.52%, 50=93.55%
+  lat (usec)   : 100=3.02%, 250=0.95%, 500=0.03%, 750=0.01%, 1000=0.01%
+  lat (msec)   : 2=0.01%, 4=0.01%, 10=0.01%, 20=0.01%
+  cpu          : usr=2.95%, sys=31.56%, ctx=768322, majf=0, minf=16
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,774385,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+  WRITE: bw=101MiB/s (106MB/s), 101MiB/s-101MiB/s (106MB/s-106MB/s), io=3025MiB (3172MB), run=30001-30001msec
+
+Disk stats (read/write):
+  sdd: ios=0/326310, merge=0/28, ticks=0/6468519, in_queue=6468528, util=5.68%
+sparkwang@jsyzwangyeNKU:~/fio_test$ fio --name=randwrite_mmap --rw=randwrite --bs=4k --numjobs=1 --iodepth=1 --ioengine=mmap --filename=testfile --size=5G --runtime=30
+randwrite_mmap: (g=0): rw=randwrite, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=mmap, iodepth=1
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1): [w(1)][100.0%][w=24.6MiB/s][w=6291 IOPS][eta 00m:00s]
+randwrite_mmap: (groupid=0, jobs=1): err= 0: pid=3586: Wed Apr  1 11:51:00 2026
+  write: IOPS=6315, BW=24.7MiB/s (25.9MB/s)(740MiB/30001msec); 0 zone resets
+    clat (usec): min=112, max=25477, avg=155.28, stdev=160.36
+     lat (usec): min=112, max=25477, avg=155.36, stdev=160.37
+    clat percentiles (usec):
+     |  1.00th=[  118],  5.00th=[  125], 10.00th=[  129], 20.00th=[  135],
+     | 30.00th=[  137], 40.00th=[  141], 50.00th=[  145], 60.00th=[  149],
+     | 70.00th=[  153], 80.00th=[  161], 90.00th=[  182], 95.00th=[  206],
+     | 99.00th=[  297], 99.50th=[  355], 99.90th=[  947], 99.95th=[ 1467],
+     | 99.99th=[ 9503]
+   bw (  KiB/s): min= 3689, max=28584, per=100.00%, avg=25290.20, stdev=3724.29, samples=59
+   iops        : min=  922, max= 7146, avg=6322.22, stdev=931.04, samples=59
+  lat (usec)   : 250=97.81%, 500=1.95%, 750=0.09%, 1000=0.06%
+  lat (msec)   : 2=0.05%, 4=0.02%, 10=0.01%, 20=0.01%, 50=0.01%
+  cpu          : usr=0.96%, sys=8.92%, ctx=189519, majf=189481, minf=16
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,189481,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+  WRITE: bw=24.7MiB/s (25.9MB/s), 24.7MiB/s-24.7MiB/s (25.9MB/s-25.9MB/s), io=740MiB (776MB), run=30001-30001msec
+
+Disk stats (read/write):
+  sdd: ios=189301/128463, merge=0/11, ticks=25941/2565291, in_queue=2591238, util=80.58%

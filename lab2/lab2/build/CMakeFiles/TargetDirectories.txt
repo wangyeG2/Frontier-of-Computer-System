@@ -1,0 +1,5 @@
+/home/sparkwang/Frontier of Computer Systems/lab2/build/CMakeFiles/task1_benchmark.dir
+/home/sparkwang/Frontier of Computer Systems/lab2/build/CMakeFiles/task2_latency.dir
+/home/sparkwang/Frontier of Computer Systems/lab2/build/CMakeFiles/task3_cache.dir
+/home/sparkwang/Frontier of Computer Systems/lab2/build/CMakeFiles/edit_cache.dir
+/home/sparkwang/Frontier of Computer Systems/lab2/build/CMakeFiles/rebuild_cache.dir

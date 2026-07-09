@@ -1,0 +1,1 @@
+/usr/bin/c++  -O2 -pthread -O3 -DNDEBUG CMakeFiles/task1_benchmark.dir/src/task1_benchmark.cpp.o -o task1_benchmark  /usr/local/lib/libleveldb.a -lpthread 

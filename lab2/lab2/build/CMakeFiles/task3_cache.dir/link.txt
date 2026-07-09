@@ -1,0 +1,1 @@
+/usr/bin/c++  -O2 -pthread -O3 -DNDEBUG CMakeFiles/task3_cache.dir/src/task3_cache.cpp.o -o task3_cache  /usr/local/lib/libleveldb.a -lpthread 
